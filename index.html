@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPulse AI - Smart Pet Health Monitoring</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4A90E2;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4A90E2;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #4A90E2 0%, #7ED321 100%);
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #4A90E2;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        /* Features Section */
+        .features {
+            background: #f8fafc;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4A90E2, #7ED321);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: white;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #7ED321;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .step p {
+            color: #666;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: #f8fafc;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid #4A90E2;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: "Most Popular";
+            background: #4A90E2;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #4A90E2;
+            margin-bottom: 1.5rem;
+        }
+
+        .price .period {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            color: #666;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: #7ED321;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .pricing-button {
+            display: inline-block;
+            background: #4A90E2;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .pricing-button:hover {
+            background: #3a7bc8;
+            transform: translateY(-2px);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 5px solid #4A90E2;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .testimonial-role {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: #f8fafc;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            background: #4A90E2;
+            color: white;
+            padding: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #3a7bc8;
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, #4A90E2 0%, #7ED321 100%);
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        .newsletter-button {
+            background: white;
+            color: #4A90E2;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">PetPulse AI</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>AI-Powered Pet Health Monitoring</h1>
+            <p>Catch health issues before they become expensive emergencies. Our smart AI analyzes your pet's photos and behavior to provide early health warnings and peace of mind.</p>
+            <a href="#pricing" class="cta-button">Start Free Trial</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section features">
+        <div class="container">
+            <h2 class="section-title">Why Pet Parents Love PetPulse AI</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3>AI Photo Analysis</h3>
+                    <p>Upload photos and our advanced computer vision instantly analyzes for skin conditions, eye problems, posture changes, and other health indicators.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Behavioral Tracking</h3>
+                    <p>Monitor eating, sleeping, and activity patterns. Our AI learns your pet's baseline and alerts you to concerning changes before symptoms worsen.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🩺</div>
+                    <h3>Vet Reports</h3>
+                    <p>Generate professional reports with our findings to share with your veterinarian, making consultations more efficient and productive.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Save on Vet Bills</h3>
+                    <p>Early detection means avoiding costly emergency visits. Our users report saving an average of $2,400 annually on unexpected vet expenses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="section how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Snap & Upload</h3>
+                    <p>Take photos of your pet or upload existing ones. Our AI analyzes visual health indicators in seconds.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Track Behavior</h3>
+                    <p>Log daily activities, appetite, and mood. Our system learns your pet's normal patterns.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Insights</h3>
+                    <p>Receive personalized health alerts, recommendations, and professional vet reports when needed.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Take Action</h3>
+                    <p>Address concerns early with our guidance, or share reports with your vet for informed consultations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section pricing">
+        <div class="container">
+            <h2 class="section-title">Choose Your Plan</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">Free</div>
+                    <ul class="features-list">
+                        <li>3 photo analyses per month</li>
+                        <li>Basic symptom tracker</li>
+                        <li>General pet care tips</li>
+                        <li>Community support</li>
+                    </ul>
+                    <a href="#" class="pricing-button">Get Started Free</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Premium Pet Parent</h3>
+                    <div class="price">$14.99<span class="period">/month</span></div>
+                    <ul class="features-list">
+                        <li>Unlimited AI photo analysis</li>
+                        <li>Behavioral tracking</li>
+                        <li>Personalized health alerts</li>
+                        <li>Vet report generation</li>
+                        <li>Medication reminders</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#" class="pricing-button">Start 14-Day Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Multi-Pet Family</h3>
+                    <div class="price">$24.99<span class="period">/month</span></div>
+                    <ul class="features-list">
+                        <li>Up to 5 pets</li>
+                        <li>Family dashboard</li>
+                        <li>Emergency contact integration</li>
+                        <li>Advanced analytics</li>
+                        <li>All Premium features</li>
+                        <li>24/7 priority support</li>
+                    </ul>
+                    <a href="#" class="pricing-button">Start Family Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">What Pet Parents Are Saying</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p>"PetPulse AI caught my dog's skin condition three days before I would have noticed. The early treatment saved us from a $1,200 emergency visit and weeks of discomfort for Luna."</p>
+                    <div class="testimonial-author">Sarah Mitchell</div>
+                    <div class="testimonial-role">Golden Retriever Mom, Seattle</div>
+                </div>
+                <div class="testimonial">
+                    <p>"As a foster mom for 6 cats, this app is a lifesaver. I can monitor all of them efficiently and the behavioral tracking helps me understand each cat's unique needs. The vet reports make handoffs to adopters seamless."</p>
+                    <div class="testimonial-author">Maria Rodriguez</div>
+                    <div class="testimonial-role">Cat Foster Volunteer, Austin</div>
+                </div>
+                <div class="testimonial">
+                    <p>"The peace of mind is worth every penny. My senior cat Max has multiple health issues, and PetPulse helps me track his symptoms and share detailed reports with our vet. It's like having a health assistant for pets."</p>
+                    <div class="testimonial-author">Robert Chen</div>
+                    <div class="testimonial-role">Senior Cat Parent, Boston</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">How accurate is the AI health analysis?</div>
+                <div class="faq-answer">Our AI has been trained on over 500,000 pet health images and achieves 94% accuracy in detecting common health indicators. However, PetPulse AI is designed to supplement, not replace, professional veterinary care.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What types of health issues can it detect?</div>
+                <div class="faq-answer">PetPulse AI can identify skin conditions, eye problems, dental issues, posture changes, gait abnormalities, and behavioral pattern changes that may indicate underlying health concerns.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Does it work for both cats and dogs?</div>
+                <div class="faq-answer">Yes! Our AI is trained on both cats and dogs of all breeds and sizes. We're continuously expanding to support other pets including rabbits, birds, and small mammals.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can I share the reports with my veterinarian?</div>
+                <div class="faq-answer">Absolutely! Our professional vet reports are formatted to be easily shared with your veterinarian, helping make consultations more efficient and informed.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Is my pet's data secure and private?</div>
+                <div class="faq-answer">Yes, we use enterprise-grade encryption and never share your pet's data with third parties. Your privacy and your pet's information are our top priorities.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated on Pet Health</h2>
+            <p>Get weekly tips, health insights, and early access to new features</p>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Enter your email" class="newsletter-input">
+                <button type="submit" class="newsletter-button">Subscribe</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 PetPulse AI. All rights reserved. Made with ❤️ for pet parents everywhere.</p>
+        </div>
+    </footer>
+</body>
+</html>
