@@ -1,0 +1,2 @@
+# petpulse-ai-smart-pet-health-behavior-monitoring-app
+PetPulse AI is a comprehensive pet health monitoring app that uses computer vision and AI to analyze pet photos/videos for early health warnings, behavioral changes, and wellness insights. With pet ownership at all-time highs and vet costs skyrocketing, owners desperately need affordable early intervention tools. The app combines symptom tracking, 
